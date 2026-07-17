@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Landslide Assessment Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden">
+        <div class="spinner-container">
+            <div class="spinner-ring"><div class="spinner-core"></div></div>
+            <p id="loading-text">Processing InSAR data through Analysis Engine...</p>
+            <div class="spinner-dots"><span></span><span></span><span></span></div>
+        </div>
+    </div>
+
+    <!-- App Header -->
+    <header class="app-header glass-header">
+        <div class="header-left">
+            <a href="index.html" class="logo-mark" style="text-decoration: none;">
+                <span class="pulse-dot"></span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 17l4-8 4 4 4-6 4 5"/><path d="M3 20h18"/>
+                </svg>
+            </a>
+            <div class="header-title-group">
+                <h1>ASSESSMENT PLATFORM</h1>
+            </div>
+        </div>
+        <div class="header-right" id="header-status-bar">
+            <div class="status-item"><span class="status-label">SAMPLE</span><span class="status-value" id="header-sample-id">—</span></div>
+            <div class="status-divider"></div>
+            <div class="status-item"><span class="status-label">REGION</span><span class="status-value" id="header-region">—</span></div>
+            <div class="status-divider"></div>
+            <div class="status-item"><span class="status-label">RISK LEVEL</span><span class="status-value" id="header-risk-level">—</span></div>
+        </div>
+    </header>
+
+    <!-- Slide Navigation Controls -->
+    <div class="slide-controls">
+        <button id="prev-slide" class="nav-btn" disabled>
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="slide-dots" id="slide-dots"></div>
+        <button id="next-slide" class="nav-btn">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+    </div>
+
+    <!-- Slide Container -->
+    <div class="slider-wrapper">
+        <div class="slides-container" id="slides-container">
+
+            <!-- Slide 1: Ingestion -->
+            <section class="slide active slide-bg-upload">
+                <div class="slide-content dual-col">
+                    <div class="card glass-card">
+                        <div class="card-header">
+                            <h2>01. InSAR Image Ingestion</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="upload-zone" id="drop-zone">
+                                <input type="file" id="coherence-file-input" accept=".tif,.tiff,image/tiff" class="hidden">
+                                <input type="file" id="phase-file-input" accept=".tif,.tiff,image/tiff" class="hidden">
+                                <div class="upload-panel" id="upload-panel">
+                                    <div class="upload-icon-wrap">
+                                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                                    </div>
+                                    <p class="upload-headline">Drop InSAR TIFF pair here</p>
+                                    <div class="file-rows">
+                                        <div class="file-row"><button class="btn btn-sm btn-outline" id="select-coherence-btn">Coherence TIFF</button><span class="file-chip" id="coherence-filename">No file selected</span></div>
+                                        <div class="file-row"><button class="btn btn-sm btn-outline" id="select-phase-btn">Phase TIFF</button><span class="file-chip" id="phase-filename">No file selected</span></div>
+                                        <div class="file-row"><select class="btn btn-sm btn-outline" id="region-select" style="width: 100%"><option value="">Select Region...</option><option value="EcrinPark">EcrinPark</option><option value="OutsideTheBox">OutsideTheBox</option><option value="QueyrasPark">QueyrasPark</option><option value="Vanoise">Vanoise</option></select></div>
+                                        <div class="file-row"><select class="btn btn-sm btn-outline" id="temporal-baseline-select" style="width: 100%"><option value="">Select Temporal Baseline...</option><option value="6 Days">6 Days</option><option value="12 Days">12 Days</option><option value="18 Days">18 Days</option></select></div>
+                                    </div>
+                                    <div id="upload-validation-errors" class="upload-errors hidden"></div>
+                                    <button class="btn btn-primary" id="analyze-btn" disabled>Run Analysis Engine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card glass-card">
+                        <div class="card-header flex-header">
+                            <h2>Development Samples</h2>
+                            <button class="btn btn-sm btn-ghost" id="refresh-samples-btn">Refresh</button>
+                        </div>
+                        <div class="card-body">
+                            <label class="field-label" for="sample-select">Load stored Analysis Engine JSON</label>
+                            <select id="sample-select" class="field-select"></select>
+                            <button class="btn btn-primary" id="load-sample-btn" style="margin-top: 1rem;">Load Sample</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Spatial Viewport -->
+            <section class="slide slide-bg-viewport">
+                <div class="slide-content viewport-slide">
+                    <div class="card glass-card fill-height">
+                        <div class="card-header">
+                            <h2>02. Spatial Mapping Viewport</h2>
+                            <p class="card-subtitle">Complete visual pipeline — four stages of InSAR analysis</p>
+                        </div>
+                        <div class="card-body viewport-body">
+                            <div class="viewport-grid" id="viewport-grid">
+                                <div class="vp-panel" id="vp-panel-original">
+                                    <div class="vp-label"><span>1. Original Input</span></div>
+                                    <div class="vp-img-wrap">
+                                        <div class="vp-placeholder" id="vp-ph-original"><span>RGB Composite</span></div>
+                                        <img id="vp-img-original" class="vp-img hidden">
+                                    </div>
+                                </div>
+                                <div class="vp-panel" id="vp-panel-prediction">
+                                    <div class="vp-label"><span>2. SegFormer Prediction</span></div>
+                                    <div class="vp-img-wrap">
+                                        <div class="vp-placeholder" id="vp-ph-prediction"><span>Prediction Mask</span></div>
+                                        <img id="vp-img-prediction" class="vp-img hidden">
+                                    </div>
+                                </div>
+                                <div class="vp-panel" id="vp-panel-heatmap">
+                                    <div class="vp-label"><span>3. Probability Heatmap</span></div>
+                                    <div class="vp-img-wrap">
+                                        <div class="vp-placeholder" id="vp-ph-heatmap"><span>Probability Heatmap</span></div>
+                                        <img id="vp-img-heatmap" class="vp-img hidden">
+                                    </div>
+                                </div>
+                                <div class="vp-panel" id="vp-panel-overlay">
+                                    <div class="vp-label"><span>4. Overlay Image</span></div>
+                                    <div class="vp-img-wrap">
+                                        <div class="vp-placeholder" id="vp-ph-overlay"><span>Mask Overlay</span></div>
+                                        <img id="vp-img-overlay" class="vp-img hidden">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slides 3-9: Dashboard Sections -->
+            <!-- We will inject the generated dashboard sections here using JS -->
+            <section class="slide slide-bg-3" id="slide-dashboard">
+                <div class="slide-content">
+                    <div class="card glass-card fill-height">
+                        <div class="card-header flex-header">
+                            <h2>Analysis Engine Dashboard</h2>
+                            <span class="source-badge">Source: Analysis Engine JSON</span>
+                        </div>
+                        <div class="dashboard-scroll" id="dashboard-container">
+                            <div class="dashboard-placeholder">
+                                <p>Run analysis or load a development sample to populate the dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Report -->
+            <section class="slide slide-bg-report">
+                <div class="slide-content">
+                    <div class="card glass-card fill-height">
+                        <div class="card-header flex-header">
+                            <h2>Integrated Assessment Report</h2>
+                            <button class="btn btn-sm btn-primary hidden" id="pdf-download-btn">Download PDF</button>
+                        </div>
+                        <div class="report-scroll">
+                            <div class="report-content" id="report-box">
+                                <div class="dashboard-placeholder"><p>Generate analysis to compile the integrated engineering report.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Chat -->
+            <section class="slide slide-bg-chat">
+                <div class="slide-content">
+                    <div class="card glass-card fill-height chat-layout">
+                        <div class="card-header">
+                            <h2>Assessment Chat Assistant</h2>
+                        </div>
+                        <div class="chat-log" id="chat-messages">
+                            <div class="chat-msg chat-system"><p>Ask questions about the generated report and Analysis Engine metrics once analysis completes.</p></div>
+                        </div>
+                        <div class="chat-input-bar">
+                            <input type="text" id="chat-input" class="chat-input" placeholder="Query analysis metrics or report findings..." disabled>
+                            <button class="btn btn-primary" id="chat-send-btn" disabled>Send</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="dashboard.js"></script>
+    <script src="app.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>

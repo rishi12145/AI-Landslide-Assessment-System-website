@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Project - AI Landslide Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="landing.css">
+    <style>
+        .about-main {
+            padding: 6rem 2rem 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        .back-nav {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            background: linear-gradient(90deg, #fff, var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .about-section {
+            background: rgba(16, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-teal);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .about-section p {
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            background: rgba(20, 184, 166, 0.05);
+            border-color: rgba(20, 184, 166, 0.2);
+        }
+
+        .tech-icon {
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+        }
+
+        .tech-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .pipe-node {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        .pipe-arrow {
+            color: var(--accent-teal);
+            margin: 0 1rem;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body class="landing-body">
+    <!-- Animated CSS Background (reusing landing background) -->
+    <div class="landing-bg" style="opacity: 0.3;">
+        <div class="grid-layer"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="back-nav">
+        <a href="index.html" class="btn btn-outline btn-sm">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <!-- Content -->
+    <main class="about-main">
+        <div class="about-header">
+            <h1>Research & Architecture</h1>
+            <p>Geotechnical hazard assessment through Artificial Intelligence</p>
+        </div>
+
+        <section class="about-section">
+            <h2>Project Motivation & Objectives</h2>
+            <p>
+                Landslides represent one of the most destructive natural hazards globally, causing significant loss of life and infrastructure damage. Traditional monitoring relies on manual field surveys and visual interpretation of optical imagery, which is labor-intensive and often limited by cloud cover.
+            </p>
+            <p>
+                This research platform demonstrates an automated pipeline that leverages Multi-Temporal Interferometric Synthetic Aperture Radar (InSAR) combined with state-of-the-art Deep Learning (SegFormer) and Vision-Language Models (VLM). The objective is to provide a rapid, automated, and highly accurate assessment tool for geotechnical engineers and researchers.
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3>Multi-Temporal InSAR</h3>
+                    <p>Phase and Coherence data derived from Sentinel-1 SAR imagery for mm-scale surface deformation mapping.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3>SegFormer AI</h3>
+                    <p>Transformer-based semantic segmentation model optimized for Earth Observation data.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                    </div>
+                    <h3>Analysis Engine</h3>
+                    <p>Python-based deterministic engine computing geometric, phase, and statistical properties of detected hazards.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                    </div>
+                    <h3>Vision-Language Models</h3>
+                    <p>Multimodal Qwen2.5-VL model for generating professional engineering reports and interactive Q&A.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Processing Pipeline</h2>
+            <p>The system operates in a linear deterministic pipeline to ensure scientific repeatability.</p>
+            <div class="pipeline">
+                <div class="pipe-node"><strong>1. Ingestion</strong><br><small>Coherence & Phase TIFF</small></div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-node"><strong>2. Inference</strong><br><small>SegFormer Mask Generation</small></div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-node"><strong>3. Analysis</strong><br><small>Metrics Calculation</small></div>
+                <div class="pipe-arrow">➔</div>
+                <div class="pipe-node"><strong>4. Reporting</strong><br><small>VLM PDF Generation</small></div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="dashboard.html" class="btn btn-primary btn-lg pulse-btn">Launch Assessment Platform</a>
+        </div>
+    </main>
+</body>
+</html>

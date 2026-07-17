@@ -1,0 +1,103 @@
+{
+    "sample_index": 1597,
+    "sample_id": "sample_01597",
+    "dataset_index": 628,
+    "image_id": "138_32",
+    "image_name": "138_32.tif",
+    "region": "EcrinPark",
+    "temporal_baseline": "6days",
+    "patch_number": "coherence",
+    "coherence_path": "/kaggle/input/datasets/rishikeshgopal45/landslide-insar-isslide/ReadyToBeUsedDataset/6days/EcrinPark/31Aug2018_06Sep2018/coherence/138_32.tif",
+    "phase_path": "/kaggle/input/datasets/rishikeshgopal45/landslide-insar-isslide/ReadyToBeUsedDataset/6days/EcrinPark/31Aug2018_06Sep2018/phase/138_32.tif",
+    "ground_truth_path": "/kaggle/input/datasets/rishikeshgopal45/landslide-insar-isslide/ReadyToBeUsedDataset/6days/EcrinPark/Segmentations/31Aug2018_06Sep2018/138_32.tif",
+    "dataset_split": "Test",
+    "analysis_date": "2026-07-06 12:43:24",
+    "coherence_analysis": {
+        "mean": 0.7555575370788574,
+        "median": 0.8030383586883545,
+        "minimum": 0.12708206474781036,
+        "maximum": 0.9609647393226624,
+        "std": 0.15237820148468018,
+        "variance": 0.023219114169478416,
+        "range": 0.8338826894760132,
+        "q25": 0.6866710186004639,
+        "q50": 0.8030383586883545,
+        "q75": 0.8664625287055969,
+        "skewness": -1.336344838142395,
+        "kurtosis": 1.4578919410705566,
+        "low_coherence_percentage": 1.4000000000000001,
+        "medium_coherence_percentage": 25.480000000000004,
+        "high_coherence_percentage": 73.11999999999999
+    },
+    "phase_analysis": {
+        "mean": -1.7295078039169312,
+        "median": -2.173590660095215,
+        "minimum": -3.140317916870117,
+        "maximum": 3.1412811279296875,
+        "std": 1.5418721437454224,
+        "variance": 2.3773696422576904,
+        "range": 6.281599044799805,
+        "skewness": 2.3689019680023193,
+        "kurtosis": 4.547760963439941,
+        "entropy": 4.550485015044102,
+        "energy": 21.17967914872389,
+        "gradient_mean": 0.21661825478076935,
+        "gradient_std": 0.7299522757530212
+    },
+    "segmentation_analysis": {
+        "ground_truth_area": 404,
+        "predicted_area": 419,
+        "difference": 15,
+        "area_percentage": 4.19,
+        "dice": 0.8359659781186395,
+        "iou": 0.7181628392334413,
+        "precision": 0.8210023866152505,
+        "recall": 0.8514851484937751,
+        "specificity": 0.9921842434337305,
+        "sensitivity": 0.8514851484937751,
+        "accuracy": 0.9864999999990134,
+        "f1_score": 0.8359659781186395,
+        "average_probability": 0.04198941960930824,
+        "maximum_probability": 0.9999995231628418,
+        "minimum_probability": 2.7365821460388466e-23
+    },
+    "shape_analysis": {
+        "connected_components": 3,
+        "largest_component": 214,
+        "smallest_component": 54,
+        "average_component_area": 139.66666666666666,
+        "perimeter": 57.455843687057495,
+        "bounding_box": [
+            73,
+            38,
+            21,
+            15
+        ],
+        "centroid": [
+            84.25233644859813,
+            43.953271028037385
+        ],
+        "convex_area": 205.5,
+        "solidity": 0.9148418491039007,
+        "aspect_ratio": 1.3999999990666665,
+        "circularity": 0.7156477344872949,
+        "shape_complexity": 17.559436029872288
+    },
+    "confidence_analysis": {
+        "average_probability": 0.04198941960930824,
+        "maximum_probability": 0.9999995231628418,
+        "minimum_probability": 2.7365821460388466e-23,
+        "confidence_variance": 0.036555688828229904,
+        "confidence_entropy": -1867.7297366654957
+    },
+    "severity_assessment": {
+        "severity_index": 0.2490756386130024,
+        "risk_level": "Low",
+        "confidence_level": "Low"
+    },
+    "file_paths": {
+        "prediction": "predictions/sample_01597.png",
+        "heatmap": "heatmaps/sample_01597.png",
+        "overlay": "overlays/sample_01597.png"
+    }
+}
